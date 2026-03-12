@@ -1,0 +1,8 @@
+.venv/
+.env
+*.parquet
+*.zip
+*.csv
+*.png
+Playground/
+AL*.png
