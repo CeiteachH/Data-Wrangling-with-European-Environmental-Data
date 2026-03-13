@@ -39,8 +39,20 @@ table_name = f"air_quality_{COUNTRY_CODE.lower()}"
 
 for file_path in parquet_files: # loops through all .parquet files
     df = pd.read_parquet(file_path, engine='pyarrow') 
-    df['Value'] = df['Value'].replace(-999.0, np.nan) # -999 to nan which is NULL in PostgresSQL
-    
+
+    # error conditions
+    is_sensor_error = (df['Value'] == -999.0) # -999 broken/offline
+    is_invalid = (df['Validity'] == -1) # invalid reading/dat
+    is_out_of_range = (df['Value'] < 0) & (~is_sensor_error)  # error with sensor (potential callibration error etc)
+
+    df['Quality_Flag'] = 'Good'
+    df.loc[is_sensor_error, 'Quality_Flag'] = 'Sensor Error (-999)'
+    df.loc[is_invalid, 'Quality_Flag'] = 'Validity Error (-1)'
+    df.loc[is_out_of_range, 'Quality_Flag'] = 'Out of Range (<0)'
+
+    # setting all bad flagged values to NaN
+    df.loc[df['Quality_Flag'] != 'Good', 'Value'] = np.nan
+
     df = df.drop(columns=['FkObservationLog'], errors='ignore')
 
     # Pushing cleaned df to PostgreSQL, 'append' adds to table if exists or creates it if it doesnt exits
