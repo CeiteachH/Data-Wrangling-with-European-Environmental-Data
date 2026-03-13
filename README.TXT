@@ -42,11 +42,12 @@ Method 1 (Segmented): all pollutants in seperate file.
 Method 2 (Consolidated). If you want a cleaner workspace.
 1. Open 'Hourly_DataAanlysis.ipynb' for pollutants ('SO2', 'O3', 'NO2', 'NOXasNO2', 'CO'),
    Open 'Daily_DataAnalysis.ipynb' for pollutants('PM10', 'PM2.5')
+   Open '8Hour_meanmax_DataAnalysis.ipynb('O3', 'CO') measured hourly but require rolling 8hr mean-max
 2. In the 3rd code cell, update the variable: POLLUTANT = 'your_desired_pollutant'.
 3. Under the Load Data Markdown, update the integer in the SQL query to match your pollutant's ID (see reference table below):
    query = f"""SELECT * FROM {table_name} WHERE "Pollutant" = 9;"""
 4. Run the notebook.
-5. Open the corresponding XGBoost notebook ('Hourly_XGBoost.ipynb' or 'Daily_XGBoost.ipynb')
+5. Open the corresponding 'XGBoost.ipynb' notebook 
 6. In the 3rd code cell, update the variable: POLLUTANT = 'your_desired_pollutant' and run the notebook 
 
 Data Output & File Location
@@ -59,8 +60,8 @@ As the pipelines run, the following data files and directories are automatically
 Reference table of Integer IDs for the:
 1 = SO2 (Hourly)
 5 = PM10 (Daily)
-7 = O3 (Hourly)
+7 = O3 (Hourly) -8hr cycle
 8 = NO2 (Hourly)
 9 = NOXasNO2 (Hourly)
-10 = CO (Hourly)
+10 = CO (Hourly) - 8hr cycle
 6001 = PM2.5 (Daily)
