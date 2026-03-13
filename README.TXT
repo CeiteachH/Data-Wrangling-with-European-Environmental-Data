@@ -9,7 +9,7 @@ Method 2 (Consolidated): Uses a unified workspace where you can easily swap targ
 - Source_Task7_Demo is to show that the project automatically works with all other countries that are part of the EEA ecosystem, the demo is done with Albania,
   This can be done directly in your .env folder in root directory by changing the variable: COUNTRY_CODE = 'AL', no need to create a new folder, I just done this for demonstration purposes.
 
-In both cases the Data Analysis, XGBoost models, and Results will be automatically saved to a 'SavedResults' folder.
+In both cases the Data Analysis Plots, XGBoost models, and Results will be automatically saved to a 'SavedResults' folder.
 
 Prerequesites
 - Python (I am using 3.13.0)
@@ -38,19 +38,16 @@ Method 1 (Segmented): all pollutants in seperate file.
 1. Open The 'DataPreperation' Folder and select file of pollutant required and run.
 2. Open the 'MachineLearningModels'Folder and run for the pollutant selected in previous step.
 3. Repeat Instruction 1. & 2. for each pollutant you want to analyse. (Can run everything in each folder one at a time if you want to analyse & model all pollutants)
-All results will be automatically saved into a 'SavedResults' folder located in the source folder
 
 Method 2 (Consolidated). If you want a cleaner workspace.
 1. Open 'Hourly_DataAanlysis.ipynb' for pollutants ('SO2', 'O3', 'NO2', 'NOXasNO2', 'CO'),
    Open 'Daily_DataAnalysis.ipynb' for pollutants('PM10', 'PM2.5')
 2. In the 3rd code cell, update the variable: POLLUTANT = 'your_desired_pollutant'.
-3. In the 9th code cell, update the integer in the SQL query to match your pollutant's ID (see reference table below):
+3. In the 8th code cell, update the integer in the SQL query to match your pollutant's ID (see reference table below):
    query = f"""SELECT * FROM {table_name} WHERE "Pollutant" = 9;"""
 4. Run the notebook.
 5. Open the corresponding XGBoost notebook ('Hourly_XGBoost.ipynb' or 'Daily_XGBoost.ipynb')
 6. In the 3rd code cell, update the variable: POLLUTANT = 'your_desired_pollutant' and run the notebook 
-All results will be automatically saved into a 'SavedResults' folder located in the source folder
-
 
 Data Output & File Location
 As the pipelines run, the following data files and directories are automatically generated:
