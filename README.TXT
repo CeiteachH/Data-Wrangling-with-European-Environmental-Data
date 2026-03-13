@@ -43,7 +43,7 @@ Method 2 (Consolidated). If you want a cleaner workspace.
 1. Open 'Hourly_DataAanlysis.ipynb' for pollutants ('SO2', 'O3', 'NO2', 'NOXasNO2', 'CO'),
    Open 'Daily_DataAnalysis.ipynb' for pollutants('PM10', 'PM2.5')
 2. In the 3rd code cell, update the variable: POLLUTANT = 'your_desired_pollutant'.
-3. In the 8th code cell, update the integer in the SQL query to match your pollutant's ID (see reference table below):
+3. Under the Load Data Markdown, update the integer in the SQL query to match your pollutant's ID (see reference table below):
    query = f"""SELECT * FROM {table_name} WHERE "Pollutant" = 9;"""
 4. Run the notebook.
 5. Open the corresponding XGBoost notebook ('Hourly_XGBoost.ipynb' or 'Daily_XGBoost.ipynb')
