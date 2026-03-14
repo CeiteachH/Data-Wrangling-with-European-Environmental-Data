@@ -27,7 +27,7 @@ engine = create_engine(f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{D
 with zipfile.ZipFile(ZIP_FILE_PATH, 'r') as zip_ref:
     zip_ref.extractall(EXTRACT_FOLDER)
 
-# Loop to find all Parquet files and load to DB
+# Loop to find all Parquet files and saves the .parquet filepath to parquet_files list
 parquet_files = []
 for root, dirs, files in os.walk(EXTRACT_FOLDER): # Goes through sub folders, E1a
     for file in files:
