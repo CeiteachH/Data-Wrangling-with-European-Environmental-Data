@@ -2,14 +2,11 @@ Data Wrangling with European Air Quality Data
 
 This project processes, stores, analyses, and models European Air Quality Data for various pollutants using PostgreSQL and XGBoost. 
 
-There are 2 Methods of running the code.
-Method 1 (Segmented): Every pollutant is processed in a separate file. Ideal if you want to run and compare multiple pollutant models side-by-side. ('Source' folder)
-Method 2 (Consolidated): Uses a unified workspace where you can easily swap target pollutants within a single Jupyter Notebook.('Source_Method2' folder)
-
+Method (Segmented): Every pollutant is processed in a separate file. Ideal for running and compare multiple pollutant models side-by-side. ('Source' folder)
 - Source_Task7_Demo is to show that the project automatically works with all other countries that are part of the EEA ecosystem, the demo is done with Albania,
   This can be done directly in your .env folder in root directory by changing the variable: COUNTRY_CODE = 'AL', no need to create a new folder, I just done this for demonstration purposes.
 
-In both cases the Data Analysis Plots, XGBoost models, and Results will be automatically saved to a 'SavedResults' folder.
+The Data Analysis Plots, XGBoost models, and Results will be automatically saved to a 'SavedResults' folder.
 
 Prerequesites
 - Python (I am using 3.13.0)
@@ -33,27 +30,15 @@ Instructions to run the project:
    python DataIngestion.py
    pyton DataToDatabase.py
 
-
-Method 1 (Segmented): all pollutants in seperate file.
-1. Open The 'DataPreperation' Folder and select file of pollutant required and run.
-2. Open the 'MachineLearningModels'Folder and run for the pollutant selected in previous step.
-3. Repeat Instruction 1. & 2. for each pollutant you want to analyse. (Can run everything in each folder one at a time if you want to analyse & model all pollutants)
-
-Method 2 (Consolidated). If you want a cleaner workspace.
-1. Open 'Hourly_DataAanlysis.ipynb' for pollutants ('SO2', 'O3', 'NO2', 'NOXasNO2', 'CO'),
-   Open 'Daily_DataAnalysis.ipynb' for pollutants('PM10', 'PM2.5')
-   Open '8Hour_meanmax_DataAnalysis.ipynb('O3', 'CO') measured hourly but require rolling 8hr mean-max
-2. In the 3rd code cell, update the variable: POLLUTANT = 'your_desired_pollutant'.
-3. Under the Load Data Markdown, update the integer in the SQL query to match your pollutant's ID (see reference table below):
-   query = f"""SELECT * FROM {table_name} WHERE "Pollutant" = 9;"""
-4. Run the notebook.
-5. Open the corresponding 'XGBoost.ipynb' notebook 
-6. In the 3rd code cell, update the variable: POLLUTANT = 'your_desired_pollutant' and run the notebook 
+4. Run the notebooks for each of the pollutants
+   - Open The 'DataPreperation' Folder and select file of pollutant required and run.
+   - Open the 'MachineLearningModels'Folder and run for the pollutant selected in previous step.
+   Repeat Instruction 4 for each pollutant you want to analyse.
 
 Data Output & File Location
 As the pipelines run, the following data files and directories are automatically generated:
 - Raw Downloaded Data: Saved as '{COUNTRY_CODE}_Air_quality_Data.zip' ( from 'DataIngestion.py')
-- Extracted Database Data: The data extracted to go into the database is saved as '{COUNTRY_CODE}_Extracted_Air_quality_Data.zip' (from 'DataToDatabase.py')
+- Extracted Database Data: The extracted zip saved as '{COUNTRY_CODE}_Extracted_Air_quality_Data', the invalid readings are assigned NaNs and loaded to database (from 'DataToDatabase.py')
 - Cleaned Data: Output from the Data Preparation/Analysis phase is saved in the 'Cleaned_Pollutant_Data' folder as '{COUNTRY_CODE}_{POLLUTANT}_Daily_Cleaned.parquet' 
 - Model Results: All Data Analysis outputs and XGBoost models and results are automatically saved into a 'SavedResults' folder located in the source folder.
 
