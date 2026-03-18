@@ -2,7 +2,9 @@ Data Wrangling with European Air Quality Data
 
 This project processes, stores, analyses, and models European Air Quality Data for various pollutants using PostgreSQL and XGBoost. 
 
-Method (Segmented): Every pollutant is processed in a separate file. Ideal for running and compare multiple pollutant models side-by-side. ('Source' folder)
+Method:
+Every pollutant is processed in a separate file. Ideal for running and compare multiple pollutant models side-by-side. ('Source' folder)
+
 - Source_Task7_Demo is to show that the project automatically works with all other countries that are part of the EEA ecosystem, the demo is done with Albania,
   This can be done directly in your .env folder in root directory by changing the variable: COUNTRY_CODE = 'AL', no need to create a new folder, I just done this for demonstration purposes.
 
