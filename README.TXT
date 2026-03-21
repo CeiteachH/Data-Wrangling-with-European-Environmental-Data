@@ -36,6 +36,7 @@ Instructions to run the project:
    - Open The 'DataPreperation' Folder and select file of pollutant required and run.
    - Open the 'MachineLearningModels'Folder and run for the pollutant selected in previous step.
    Repeat Instruction 4 for each pollutant you want to analyse.
+5. Run the Model_Comparisons.ipynb file, plotting the national pollutant predicted vs recorded concnetrations for thr last year and 2 years sepratly for the test set.
 
 Data Output & File Location
 As the pipelines run, the following data files and directories are automatically generated:
